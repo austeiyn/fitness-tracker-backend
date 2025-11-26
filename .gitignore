@@ -1,0 +1,52 @@
+# Navigate to project
+cd C:\Users\admin\Documents\SOFT806-Assignment2\HealthTrackAPI
+
+# Create .gitignore
+@"
+.vs/
+bin/
+obj/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.log
+"@ | Out-File -FilePath .gitignore -Encoding utf8
+
+# Remove .git if exists
+if (Test-Path .git) { Remove-Item -Recurse -Force .git }
+
+# Initialize git
+git init
+
+# Add .gitignore
+git add .gitignore
+git commit -m "Add .gitignore"
+
+# Add project files (specifically, NOT using 'git add .' to avoid .vs)
+git add Controllers/
+git add Data/
+git add Models/
+git add HealthTrackAPI.csproj
+git add Program.cs
+git add Properties/
+git add appsettings.json
+
+# Check status - .vs should NOT appear
+git status
+
+# Commit
+git commit -m "Initial backend setup - HealthTrack Fitness Tracker"
+
+# Setup remote
+git branch -M main
+git remote remove origin 2>$null
+git remote add origin https://github.com/austeiyn/healthtrack-fitness-tracker-backend.git
+
+# Push
+git push -u origin main
