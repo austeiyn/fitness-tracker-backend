@@ -6,5 +6,6 @@ namespace HealthTrackAPI.Services
     {
         Task<ActivityResponse> CreateActivityAsync(ActivityRequest request);
         Task<List<ActivityResponse>> GetAllActivitiesAsync(string? type = null, string? status = null);
+	Task<ActivityResponse> GetActivityByIdAsync(int id);
     }
 }
