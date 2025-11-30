@@ -49,32 +49,6 @@ namespace HealthTrackAPI.Services
             _context.Activities.Add(activity);
             await _context.SaveChangesAsync();
 
-            return MapToResponse(activity);
-        }
-
-        public async Task<List<ActivityResponse>> GetAllActivitiesAsync(string? type = null, string? status = null)
-        {
-            var query = _context.Activities.AsQueryable();
-
-            if (!string.IsNullOrEmpty(type))
-            {
-                query = query.Where(a => a.Type == type);
-            }
-
-            if (!string.IsNullOrEmpty(status))
-            {
-                query = query.Where(a => a.Status == status);
-            }
-
-            var activities = await query
-                .OrderByDescending(a => a.Date)
-                .ToListAsync();
-
-            return activities.Select(MapToResponse).ToList();
-        }
-
-        private ActivityResponse MapToResponse(Activity activity)
-        {
             return new ActivityResponse
             {
                 Id = activity.Id,
