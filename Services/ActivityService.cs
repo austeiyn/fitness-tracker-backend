@@ -132,20 +132,20 @@ namespace HealthTrackAPI.Services
             return true;
         }
 
-        public async Task<bool> DeleteActivityAsync(int id)
-        {
-            var activity = await _context.Activities.FindAsync(id);
+	public async Task<bool> DeleteActivityAsync(int id)
+	{
+    	var activity = await _context.Activities.FindAsync(id);
 
-            if (activity == null)
-            {
-                throw new KeyNotFoundException($"Activity with ID {id} not found.");
-            }
+	    if (activity == null)
+    	{
+        	throw new KeyNotFoundException($"Activity with ID {id} not found.");
+    	}
 
-            _context.Activities.Remove(activity);
-            await _context.SaveChangesAsync();
+    _context.Activities.Remove(activity);
+    await _context.SaveChangesAsync();
 
-            return true;
-        }
+    return true;
+}
 
         public async Task<List<ActivityResponse>> GetUserActivitiesAsync(int userId)
         {
