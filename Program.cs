@@ -13,7 +13,7 @@ builder.Services.AddDbContext<HealthTrackContext>(options =>
 
 // ADD THIS LINE
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IActivityService, ActivityService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",

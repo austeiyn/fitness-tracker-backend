@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace HealthTrackAPI.Models
+namespace HealthTrackAPI.DTOs
 {
-    public class Activity
+    public class ActivityRequest
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public int UserId { get; set; }
 
@@ -25,7 +22,7 @@ namespace HealthTrackAPI.Models
 
         // Workout-specific
         public int? DurationMinutes { get; set; }
-
+        
         // Workout & Meal
         public int? Calories { get; set; }
 
@@ -34,12 +31,5 @@ namespace HealthTrackAPI.Models
 
         // Meal-specific
         public string? MealType { get; set; } // "Breakfast", "Lunch", "Dinner", "Snack"
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
-        // Navigation property
-        public User? User { get; set; }
     }
 }
