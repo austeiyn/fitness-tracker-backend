@@ -37,5 +37,19 @@ namespace HealthTrackAPI.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllActivities([FromQuery] string? type = null, [FromQuery] string? status = null)
+        {
+            try
+            {
+                var activities = await _activityService.GetAllActivitiesAsync(type, status);
+                return Ok(activities);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
