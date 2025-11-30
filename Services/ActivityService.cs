@@ -73,18 +73,6 @@ namespace HealthTrackAPI.Services
             return activities.Select(MapToResponse).ToList();
         }
 
-        public async Task<ActivityResponse> GetActivityByIdAsync(int id)
-        {
-            var activity = await _context.Activities.FindAsync(id);
-
-            if (activity == null)
-            {
-                throw new KeyNotFoundException($"Activity with ID {id} not found.");
-            }
-
-            return MapToResponse(activity);
-        }
-
         private ActivityResponse MapToResponse(Activity activity)
         {
             return new ActivityResponse

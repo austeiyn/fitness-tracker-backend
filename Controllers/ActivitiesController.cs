@@ -15,7 +15,6 @@ namespace HealthTrackAPI.Controllers
             _activityService = activityService;
         }
 
-        // UC-003: Create Activity
         [HttpPost]
         public async Task<IActionResult> CreateActivity([FromBody] ActivityRequest request)
         {
@@ -27,7 +26,7 @@ namespace HealthTrackAPI.Controllers
                 }
 
                 var response = await _activityService.CreateActivityAsync(request);
-                return CreatedAtAction(nameof(GetActivityById), new { id = response.Id }, response);
+                return CreatedAtAction(nameof(CreateActivity), new { id = response.Id }, response);
             }
             catch (ArgumentException ex)
             {
@@ -39,7 +38,6 @@ namespace HealthTrackAPI.Controllers
             }
         }
 
-        // UC-004: Get All Activities
         [HttpGet]
         public async Task<IActionResult> GetAllActivities([FromQuery] string? type = null, [FromQuery] string? status = null)
         {
@@ -47,25 +45,6 @@ namespace HealthTrackAPI.Controllers
             {
                 var activities = await _activityService.GetAllActivitiesAsync(type, status);
                 return Ok(activities);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        // UC-005: Get Activity by ID
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetActivityById(int id)
-        {
-            try
-            {
-                var activity = await _activityService.GetActivityByIdAsync(id);
-                return Ok(activity);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
             }
             catch (Exception ex)
             {
