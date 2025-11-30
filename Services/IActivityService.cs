@@ -9,8 +9,8 @@ namespace HealthTrackAPI.Services
         Task<ActivityResponse> GetActivityByIdAsync(int id);
         Task<ActivityResponse> UpdateActivityAsync(int id, ActivityRequest request);
         Task<bool> UpdateActivityStatusAsync(int id, string status);
-        Task<bool> DeleteActivityAsync(int id);
         Task<List<ActivityResponse>> GetUserActivitiesAsync(int userId);
         Task<List<ActivityResponse>> GetActivitiesByDateRangeAsync(DateTime startDate, DateTime endDate);
+	Task<bool> DeleteActivityAsync(int id);
     }
 }
