@@ -53,8 +53,32 @@ namespace HealthTrackAPI.Services
 
         public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
-            // To be implemented in UC-002
-            throw new NotImplementedException("Login will be implemented in UC-002");
+            // Find user by email
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == request.Email.ToLower());
+
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("Invalid email or password");
+            }
+
+            // Verify password using BCrypt
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
+
+            if (!isPasswordValid)
+            {
+                throw new UnauthorizedAccessException("Invalid email or password");
+            }
+
+            // Return successful login response
+            return new LoginResponse
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Message = "Login successful!"
+            };
         }
     }
 }
